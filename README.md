@@ -1,9 +1,9 @@
 # GPT Ticket Summarizer 📝
 
-A simple Python tool that uses OpenAI GPT-4 to summarize customer support tickets and store them in SQLite.
+A simple Python tool that uses OpenAI GPT-3.5 Turbo to summarize customer support tickets and store them in SQLite.
 
 ## Features
-- Two-sentence summaries via GPT-4
+- Two-sentence summaries via GPT-3.5 Turbo
 - Saves original text + summary in `tickets.db`
 - CLI usage
 
