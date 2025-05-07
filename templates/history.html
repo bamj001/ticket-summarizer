@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ticket History</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="topbar">
+        <a href="/" class="nav-item">Submit Ticket</a>
+        <a href="/history" class="nav-item active">View History</a>
+      </div>         
+  <div class="container">
+    <h1>📜 Ticket History</h1>
+    <a href="/" class="btn">← Back to Home</a>
+    <table>
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Priority</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ticket in tickets %}
+        <tr>
+          <td>{{ ticket[1] }}</td>
+          <td>{{ ticket[2] }}</td>
+          <td>{{ ticket[3] }}</td>
+          <td>{{ ticket[4] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

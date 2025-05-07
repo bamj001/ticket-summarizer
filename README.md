@@ -1,91 +1,76 @@
-# 🎟️ Ticket Summarizer
+# 🎟️ Ticket Prioritizer
 
-A Python-based CLI tool that uses OpenAI's GPT API to summarize customer support tickets, analyze sentiment, and categorize them — with results saved to a local SQLite database.
-
----
-
-## ✨ Features
-
-- 🔍 **Summarization** — Generates concise summaries of support tickets  
-- 📊 **Sentiment Analysis** — Detects whether a ticket is positive, neutral, or negative  
-- 🏷️ **Categorization** — Labels tickets into appropriate categories  
-- 💾 **Database Logging** — All results are saved to `tickets.db` with timestamps  
-- 📂 **Batch Mode** — Summarize multiple tickets from a text file  
+A web-based tool that uses AI to classify support tickets as **High**, **Medium**, or **Low** priority. This application allows users to submit tickets, receive priority classifications, and view past tickets.
 
 ---
 
-## 🚀 Setup
+## Features
 
-### 1. Clone the Repo
-
-git clone https://github.com/YOUR_USERNAME/ticket-summarizer.git
-cd ticket-summarizer
-
-### 2. Create and Activate a Virtual Environment (optional but recommended)
-
-python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
-
-### 3. Install Dependencies
-
-pip install -r requirements.txt
-
-### 4. Add Your OpenAI API Key
-
-Create a `.env` file in the root directory:
-
-OPENAI_API_KEY=your-openai-api-key-here
+- **Submit Ticket**: A form where users can input a support ticket description.
+- **Prioritize Ticket**: The AI classifies the ticket as High, Medium, or Low priority.
+- **Email Notification**: Once a ticket is prioritized, an email is sent to notify the user.
+- **History Page**: Displays a list of previously submitted tickets, along with their priorities and timestamps.
+- **Modal**: After submitting a ticket, the result (ticket description, priority) is displayed in a modal window.
+- **Top Navigation Bar**: Switch between the Submit Ticket and History pages. 
 
 ---
 
-## 🧠 Usage
+## Installation
 
-### Summarize a Single Ticket
+### Requirements
 
-python summarizer.py "The customer says their payment failed even though they were charged."
+- Python 3.8 or higher
+- SQLite
+- Flask
+- OpenAI API key
 
-### Summarize a Batch of Tickets
+### Steps to Run
 
-python summarizer.py batch tickets.txt
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/ticket-summarizer.git
+   cd ticket-summarizer
+   ```
 
-Where `tickets.txt` contains one ticket per line.
+2. Install required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### Analyze Sentiment
+3. Set your OpenAI API key:
+   - Create a `.env` file in the root directory.
+   - Add your API key:
+     ```
+     OPENAI_API_KEY=your_openai_api_key
+     ```
 
-python sentiment.py "I'm really upset that my issue hasn't been resolved."
+4. Run the Flask app:
+   ```bash
+   python app.py
+   ```
 
-### Categorize Ticket
+5. Open your browser and visit:
+   ```
+   http://localhost:5000
+   ```
 
-python categorizer.py "I'd like to upgrade my plan to the premium subscription."
+## File Structure
 
----
+```
+ticket-summarizer/
+├── app.py                # Main Flask app
+├── prioritizer.py        # Logic for ticket prioritization using OpenAI
+├── notifier.py           # Logic for sending email notifications
+├── templates/
+│   ├── index.html        # Submit Ticket page
+│   └── history.html      # History page
+├── static/
+│   ├── styles.css        # Styling for the pages
+│   └── modal.js          # Modal logic for ticket prioritization result
+└── tickets.db            # SQLite database for storing tickets
+```
 
-## 🗄️ Database Schema (`tickets.db`)
-
-Each feature writes to its own table:
-
-- `summaries(id, ticket, summary, timestamp)`
-- `sentiments(id, ticket, sentiment, timestamp)`
-- `categories(id, ticket, category, timestamp)`
-
-You can explore the data using SQLite tools like DB Browser for SQLite.
-
----
-
-## 📦 Requirements
-
-See `requirements.txt`:
-
-openai  
-python-dotenv
-
----
-
-## ✅ Example
-
-$ python summarizer.py "My order arrived damaged. I want a refund."
-Summary:
-The customer received a damaged order and is requesting a refund.
+## Endpoints
 
 ---
 

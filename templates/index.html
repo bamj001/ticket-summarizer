@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket Prioritizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="topbar">
+        <a href="/" class="nav-item active">Submit Ticket</a>
+        <a href="/history" class="nav-item">View History</a>
+      </div>           
+    <h1>Submit a Support Ticket</h1>
+    <form id="ticketForm" action="/submit_ticket" method="POST">
+        <label for="ticket">Ticket Description:</label><br>
+        <textarea id="ticket" name="ticket" rows="4" cols="50" required></textarea><br><br>
+        <button type="submit">Submit Ticket</button>
+    </form>
+
+    <!-- Modal -->
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <p>Ticket priority: <strong id="priorityText">{{ priority }}</strong></p>
+        </div>
+    </div>
+
+    {% if priority %}
+    <script>
+        const priority = "{{ priority }}";
+    </script>
+    {% endif %}
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
