@@ -66,7 +66,7 @@ ticket-summarizer/
 │   └── history.html      # History page
 ├── static/
 │   ├── styles.css        # Styling for the pages
-│   └── modal.js          # Modal logic for ticket prioritization result
+│   └── script.js         # Modal logic for ticket prioritization result
 └── tickets.db            # SQLite database for storing tickets
 ```
 
