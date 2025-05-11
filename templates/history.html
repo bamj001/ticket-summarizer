@@ -1,38 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Ticket History</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket History</title>
+    <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
-    <div class="topbar">
-        <a href="/" class="nav-item">Submit Ticket</a>
-        <a href="/history" class="nav-item active">View History</a>
-      </div>         
-  <div class="container">
-    <h1>📜 Ticket History</h1>
-    <a href="/" class="btn">← Back to Home</a>
-    <table>
-      <thead>
-        <tr>
-          <th>Description</th>
-          <th>Category</th>
-          <th>Priority</th>
-          <th>Timestamp</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for ticket in tickets %}
-        <tr>
-          <td>{{ ticket[1] }}</td>
-          <td>{{ ticket[2] }}</td>
-          <td>{{ ticket[3] }}</td>
-          <td>{{ ticket[4] }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+  <div class="topbar">
+    <a href="/" class="nav-item">Submit Ticket</a>
+    <a href="/history" class="nav-item active">View History</a>
+  </div> 
+
+    <h1>Ticket History</h1>
+
+    <!-- Sorting and Filtering -->
+    <div class="filters">
+      <form method="GET" action="/history" class="filter-form">
+          <div class="filter-group">
+              <label for="sort_by">Sort By</label>
+              <select name="sort_by" id="sort_by">
+                  <option value="timestamp">Date</option>
+                  <option value="priority">Priority</option>
+                  <option value="category">Category</option>
+              </select>
+          </div>
+  
+          <div class="filter-group">
+              <label for="filter_priority">Priority</label>
+              <select name="filter_priority" id="filter_priority">
+                  <option value="">All</option>
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+              </select>
+          </div>
+  
+          <div class="filter-group">
+              <label for="filter_category">Category</label>
+              <select name="filter_category" id="filter_category">
+                  <option value="">All</option>
+                  <option value="Technical">Technical</option>
+                  <option value="Billing">Billing</option>
+                  <option value="General">General</option>
+              </select>
+          </div>
+  
+          <button type="submit" class="apply-button">Apply Filters</button>
+      </form>
   </div>
+  
+
+    <!-- Ticket Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Ticket</th>
+                <th>Priority</th>
+                <th>Category</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in tickets %}
+            <tr>
+                <td>{{ ticket[1] }}</td>
+                <td>{{ ticket[2] }}</td>
+                <td>{{ ticket[3] }}</td>
+                <td>{{ ticket[4] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
